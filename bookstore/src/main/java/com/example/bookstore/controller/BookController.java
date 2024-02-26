@@ -1,5 +1,7 @@
 package com.example.bookstore.controller;
 
+import java.util.Optional;
+
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +47,25 @@ public class BookController {
     @PostMapping("/deletebook/{id}")
     public String deleteBook(@PathVariable @NonNull Long id) {
         bookRepo.deleteById(id);
+        return "redirect:/booklist";
+    }
+
+    @SuppressWarnings("null")
+    @GetMapping("/editbook/{id}")
+    public String showEditBookForm(@PathVariable Long id, Model model) {
+        Optional<Book> optionalBook = bookRepo.findById(id);
+        if (optionalBook.isPresent()) {
+            model.addAttribute("book", optionalBook.get());
+            return "editbook";
+        } else {
+            return "redirect:/booklist";
+        }
+    }
+
+    @SuppressWarnings("null")
+    @PostMapping("/updatebook")
+    public String updateBook(@ModelAttribute Book updatedBook) {
+        bookRepo.save(updatedBook);
         return "redirect:/booklist";
     }
     
