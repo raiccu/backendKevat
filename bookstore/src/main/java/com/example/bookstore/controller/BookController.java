@@ -15,7 +15,6 @@ import com.example.bookstore.domain.BookRepo;
 
 import io.micrometer.common.lang.NonNull;
 
-
 @Controller
 public class BookController {
 
@@ -70,4 +69,5 @@ public class BookController {
         bookRepo.save(updatedBook);
         return "redirect:/booklist";
     }
+    
     }
