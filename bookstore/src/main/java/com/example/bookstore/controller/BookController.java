@@ -1,6 +1,9 @@
 package com.example.bookstore.controller;
 
 import org.springframework.ui.Model;
+
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +14,7 @@ import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepo;
 
 import io.micrometer.common.lang.NonNull;
+
 
 @Controller
 public class BookController {
@@ -47,5 +51,23 @@ public class BookController {
         bookRepo.deleteById(id);
         return "redirect:/booklist";
     }
+
+    @SuppressWarnings("null")
+    @GetMapping("/editbook/{id}")
+    public String editBook(@PathVariable Long id, Model model) {
+       Optional<Book> optionalBook = bookRepo.findById(id);
+        if (optionalBook.isPresent()) {
+            model.addAttribute("book", optionalBook.get());
+            return "editbook";
+        } else {
+            return "redirect:/booklist";
+        }
+    }
     
+    @SuppressWarnings("null")
+    @PostMapping("/updatebook")
+    public String updateBook(@ModelAttribute Book updatedBook) {
+        bookRepo.save(updatedBook);
+        return "redirect:/booklist";
+    }
     }

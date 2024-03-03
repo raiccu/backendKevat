@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepo;
+import com.example.bookstore.domain.Category;
+import com.example.bookstore.domain.CategoryRepo;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -16,13 +18,34 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepo bookRepo) {
+	public CommandLineRunner BookCommandLineRunner(BookRepo bookRepo) {
 		return (args) -> {
 			Book a  = new Book("Roopen kokkauskirja: hidden talent keep it hidden", "Roope", 2024, 112, 69);
 			Book b  = new Book("How Java and Suicide rates are linked", "Joe Mama", 2023, 115, 69);
 
 			bookRepo.save(a);
 			bookRepo.save(b);
+
+			System.out.println(a);
+			System.out.println(b);
+
+		};
+	}
+
+	@Bean
+	public CommandLineRunner CategoryCommandLineRunner(CategoryRepo categoryRepo){
+		return (args) -> {
+			Category a = new Category( 111L, "Scifi");
+			Category b = new Category(112L, "Fantasy");
+			Category c = new Category(113L, "Comic");
+
+			categoryRepo.save(a);
+			categoryRepo.save(b);
+			categoryRepo.save(c);
+
+			System.out.println(a);
+			System.out.println(b);
+			System.out.println(c);
 		};
 	}
 
