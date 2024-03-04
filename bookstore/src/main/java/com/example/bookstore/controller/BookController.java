@@ -3,7 +3,7 @@ package com.example.bookstore.controller;
 import java.util.Optional;
 
 import org.springframework.ui.Model;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepo;
+import com.example.bookstore.domain.CategoryRepo;
 
 import io.micrometer.common.lang.NonNull;
 
 @Controller
 public class BookController {
 
-    private final BookRepo bookRepo;
+    @Autowired
+    private BookRepo bookRepo;
 
-    public BookController(BookRepo bookRepo) {
-        this.bookRepo = bookRepo;
-    }
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     @GetMapping("/booklist")
     public String showBookList(Model model) {
@@ -34,6 +35,7 @@ public class BookController {
     @GetMapping("/addbook")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
 
@@ -57,6 +59,7 @@ public class BookController {
        Optional<Book> optionalBook = bookRepo.findById(id);
         if (optionalBook.isPresent()) {
             model.addAttribute("book", optionalBook.get());
+            model.addAttribute("categories", categoryRepo.findAll());
             return "editbook";
         } else {
             return "redirect:/booklist";

@@ -18,34 +18,21 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner BookCommandLineRunner(BookRepo bookRepo) {
+	public CommandLineRunner BookCommandLineRunner(BookRepo bookRepo, CategoryRepo categoryRepo) {
 		return (args) -> {
-			Book a  = new Book("Roopen kokkauskirja: hidden talent keep it hidden", "Roope", 2024, 112, 69);
-			Book b  = new Book("How Java and Suicide rates are linked", "Joe Mama", 2023, 115, 69);
+			Category category1 = new Category("Scifi");
+			categoryRepo.save(category1);
+			Category category2 = new Category("Fantasy");
+			categoryRepo.save(category2);
+			Category category3 = new Category("Comic");
+			categoryRepo.save(category3);
 
-			bookRepo.save(a);
+			Book a = new Book("How Java and suicide rates are linked", "Jarkko", 2024, 123124, 66, category2);
+			Book b = new Book("Roopen kokkikirja", "Roope", 2023, 123123, 69, category3);
+
 			bookRepo.save(b);
+			bookRepo.save(a);
 
-			System.out.println(a);
-			System.out.println(b);
-
-		};
-	}
-
-	@Bean
-	public CommandLineRunner CategoryCommandLineRunner(CategoryRepo categoryRepo){
-		return (args) -> {
-			Category a = new Category( 111L, "Scifi");
-			Category b = new Category(112L, "Fantasy");
-			Category c = new Category(113L, "Comic");
-
-			categoryRepo.save(a);
-			categoryRepo.save(b);
-			categoryRepo.save(c);
-
-			System.out.println(a);
-			System.out.println(b);
-			System.out.println(c);
 		};
 	}
 
