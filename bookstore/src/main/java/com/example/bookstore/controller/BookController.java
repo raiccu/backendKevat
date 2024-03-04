@@ -47,7 +47,7 @@ public class BookController {
     }
 
     @SuppressWarnings("null")
-    @PostMapping("/deletebook/{id}")
+    @GetMapping("/deletebook/{id}")
     public String deleteBook(@PathVariable @NonNull Long id) {
         bookRepo.deleteById(id);
         return "redirect:/booklist";
