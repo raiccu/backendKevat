@@ -1,0 +1,70 @@
+:root {
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1,h2,h3, label {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+:is(td,th) {
+    border-style: solid;
+    padding: 1ch;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: #6889de;
+    color: white;
+    padding: .5ch;
+    border-radius: .5ch;
+    margin: .5ch;
+    text-align: center;
+}
+
+td:has(a) {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    text-decoration: none;
+    font-size: 1rem;
+    border: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: #6889de;
+    color: white;
+    padding: .5ch;
+    border-radius: .5ch;
+    text-align: center;
+    cursor: pointer;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+}
